@@ -20,7 +20,7 @@ jobs:
 
      
       - name: Install dependencies
-        run: npm cd
+        run: npm ci
 
       - name: build app
         run: npm run build
