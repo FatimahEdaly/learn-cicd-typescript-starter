@@ -44,7 +44,7 @@ jobs:
         run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
       - name: Run migrations
-        run: goose -dir sql/schema turso $DATABASE_URL up
+        run: $(go env GOPATH)/bin/goose -dir sql/schema turso $DATABASE_URL up
       - name: 'Deploy to Cloud Run'
         run: |
           gcloud run deploy notely \
