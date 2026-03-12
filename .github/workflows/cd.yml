@@ -18,10 +18,22 @@ jobs:
         with:
           node-version: 22
 
-     
       - name: Install dependencies
         run: npm ci
 
-      - name: build app
+      - name: Build app
         run: npm run build
-  
+
+      # خطوة تسجيل الدخول باستخدام السر (Secret) الذي أضفتيه في GitHub
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2' # استخدمي الإصدار v2 المستقر
+
+      - name: 'Build and Push to Artifact Registry'
+        run: |
+          gcloud builds submit --tag us-central1-docker.pkg.dev/584358961194/notely-ar-repo/notely:${{ github.sha }} .
