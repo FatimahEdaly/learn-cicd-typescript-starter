@@ -38,5 +38,4 @@ jobs:
 
       - name: 'Build and Push to Artifact Registry'
         run: |
-          # أضفنا --project للتأكد من أن gcloud لا يذهب للمشروع القديم
-          gcloud builds submit --project 584358961194 --tag us-central1-docker.pkg.dev/584358961194/notely-ar-repo/notely:${{ github.sha }} .
+          gcloud builds submit --project notely-489920 --tag us-central1-docker.pkg.dev/584358961194/notely-ar-repo/notely:${{ github.sha }} .
